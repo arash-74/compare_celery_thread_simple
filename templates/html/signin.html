@@ -1,0 +1,25 @@
+{% extends 'html/base.html' %}
+{% load widget_tweaks %}
+{% block title %}sign in{% endblock %}
+{% block container %}
+    <div class="error-container">
+        {% if form.errors %}
+            {% for error in form.errors.values %}
+                {% if forloop.counter0 == 0 %}
+                    <p class="error">{{ error|striptags }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+    <form method="POST">
+    {% csrf_token %}
+        <div>
+            {% render_field form.email placeholder='Email' %}
+        </div>
+        <div>
+            {% render_field form.password placeholder='Password' type='password' %}
+        </div>
+        <button type="submit">sign in</button>
+    </form>
+    <div class="notification"></div>
+{% endblock %}
